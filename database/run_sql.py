@@ -28,7 +28,7 @@ def run_sql(sql, values=None):
 
 def get_config():
 
-    with open(".\config.yml","r") as f:
+    with open("SimpleWebApp\config.yml","r") as f:
         config = yaml.safe_load(f)
 
     return config
