@@ -20,3 +20,6 @@ class Atividade:
         self.tipo_plano = tipo_plano
         self.ativo = ativo
         self.id = id
+
+    def __str__(self) -> str:
+        return f"""\nNome: {self.nome}\nInstrutor: {self.instrutor}\ndata_atividade: {self.data_atividade}\nDuração: {self.duracao}\nCapacidade: {self.capacidade}\nPlano: {self.tipo_plano}\nAtivo: {self.ativo}\nid: {self.id}"""

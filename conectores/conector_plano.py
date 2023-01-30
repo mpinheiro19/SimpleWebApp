@@ -24,7 +24,7 @@ def get_n(n = 10):
     tipos_planos = []
 
     sql_query = f"SELECT * FROM webuser.tb_planos limit {n}"
-    results = run_sql(sql_query)
+    results = run_sql(sql_query,n)
 
     for row in results:
 
