@@ -59,7 +59,7 @@ def get_members(id : int):
     return clientes
     
     
-def get_all_active():
+def get_all_active_ordered():
 
     atividades = []
 
@@ -83,11 +83,11 @@ def get_all_active():
 
     return atividades
 
-def get_all_inactive():
+def get_all_active():
 
     atividades = []
 
-    sql_query = "SELECT * FROM WEBUSER.TB_ATIVIDADES WHERE ATIVO = FALSE ORDER BY DATA_ATIVIDADE ASC"
+    sql_query = "SELECT * FROM WEBUSER.TB_ATIVIDADES WHERE ATIVO = TRUE"
     results = run_sql(sql_query)
 
     for row in results:
