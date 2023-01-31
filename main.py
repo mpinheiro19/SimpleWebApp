@@ -1,8 +1,7 @@
-from conectores.conector_instruturor import *
+from conectores.conector_atividade import *
 
 if __name__=="__main__":
-    
-    r = get_activities(2)
+
+    r = get_members(3)
 
     print(*r)
-

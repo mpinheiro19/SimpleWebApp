@@ -124,7 +124,7 @@ def edit_one(instrutor : Instrutor) -> None:
 
     run_sql(sql, value)
 
-def delete_instrutor(id):
+def delete_instrutor(id) -> None:
     sql = "DELETE FROM webuser.tb_instrutores where id = %s"
     value = [id]
 
