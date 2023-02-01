@@ -1,6 +1,7 @@
 from classes.cliente import Cliente
 from classes.atividade import Atividade
-from classes.plano import TipoPlano
+import conectores.conector_plano as plano
+import conectores.conector_instrutor as instrutor
 from database.run_sql import run_sql, get_config
 
 def get_all():
@@ -12,13 +13,16 @@ def get_all():
 
     for row in results:
 
+        tipo_plano = plano.get_one(row["tipo_plano"])
+        nome_instrutor = instrutor.get_one(row['instrutor'])
+
         item = Atividade(
             row["nome"],
-            row["instrutor"],
+            nome_instrutor.nome +" "+ nome_instrutor.sobrenome,
             row["data_atividade"],
             row['duracao'],
             row['capacidade'],
-            row['tipo_plano'],
+            tipo_plano.plano,
             row['ativo'],
             row['id']
             )
@@ -41,6 +45,7 @@ def get_members(id : int):
     results = run_sql(sql, value)
     
     for row in results:
+        tipo_plano = plano.get_one(row["tipo_plano"])
         cliente = Cliente(
             row["nome"],
             row["sobrenome"],
@@ -48,7 +53,7 @@ def get_members(id : int):
             row["endereco"],
             row["telefone"],
             row["email"],
-            row["tipo_plano"],
+            tipo_plano.plano,
             row["data_inicio"],
             row["ativo"],
             row["id"]
@@ -68,13 +73,16 @@ def get_all_active_ordered():
 
     for row in results:
 
+        tipo_plano = plano.get_one(row["tipo_plano"])
+        nome_instrutor = instrutor.get_one(row['instrutor'])
+
         item = Atividade(
             row["nome"],
-            row["instrutor"],
+            nome_instrutor.nome,
             row["data_atividade"],
             row['duracao'],
             row['capacidade'],
-            row['tipo_plano'],
+            tipo_plano.plano,
             row['ativo'],
             row['id']
             )
@@ -92,13 +100,16 @@ def get_all_active():
 
     for row in results:
 
+        tipo_plano = plano.get_one(row["tipo_plano"])
+        nome_instrutor = instrutor.get_one(row['instrutor'])
+
         item = Atividade(
             row["nome"],
-            row["instrutor"],
+            nome_instrutor.nome,
             row["data_atividade"],
             row['duracao'],
             row['capacidade'],
-            row['tipo_plano'],
+            tipo_plano.plano,
             row['ativo'],
             row['id']
             )
@@ -115,13 +126,17 @@ def get_one(id : int):
     results = run_sql(sql_query, value)[0]
 
     if results is not None:
+
+        tipo_plano = plano.get_one(results["tipo_plano"])
+        nome_instrutor = instrutor.get_one(results['instrutor'])
+
         atividade = Atividade(
             results["nome"],
-            results["instrutor"],
+            nome_instrutor.nome,
             results["data_atividade"],
             results['duracao'],
             results['capacidade'],
-            results['tipo_plano'],
+            tipo_plano.plano,
             results['ativo'],
             results['id']
             )
@@ -137,13 +152,16 @@ def get_n(n=10):
 
     for row in results:
 
+        tipo_plano = plano.get_one(row["tipo_plano"])
+        nome_instrutor = instrutor.get_one(row['instrutor'])
+
         atividade = Atividade(
             row["nome"],
-            row["instrutor"],
+            nome_instrutor.nome,
             row["data_atividade"],
             row['duracao'],
             row['capacidade'],
-            row['tipo_plano'],
+            tipo_plano.plano,
             row['ativo'],
             row['id']
             )

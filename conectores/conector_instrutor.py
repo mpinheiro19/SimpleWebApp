@@ -1,6 +1,7 @@
 from classes.instrutor import Instrutor
 from classes.atividade import Atividade
 from database.run_sql import run_sql, get_config
+import conectores.conector_plano as plano
 
 def get_all():
 
@@ -76,13 +77,15 @@ def get_activities(instrutor_id):
     
     for item in query_results:
 
+        tipo_plano = plano.get_one(item["tipo_plano"])
+        nome_instrutor = get_one(item['instrutor'])
         atividade = Atividade(
             item["nome"],
-            item["instrutor"],
+            nome_instrutor.nome,
             item["data_atividade"],
             item["duracao"],
             item["capacidade"],
-            item["tipo_plano"],
+            tipo_plano.plano,
             item['ativo'],
             item['id']
         )
