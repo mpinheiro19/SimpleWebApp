@@ -1,6 +1,7 @@
 from classes.cliente import Cliente
 from classes.atividade import Atividade
 import conectores.conector_plano as plano
+import conectores.conector_instrutor as instrutor
 from database.run_sql import run_sql, get_config
 
 def get_all():
@@ -133,11 +134,68 @@ def delete_one(id : int) -> None:
 
     run_sql(sql, values)
 
-def get_activitites(id):
-    raise NotImplementedError  
+def get_activitites(id : int) -> list:
 
-def get_all_active():
-    raise NotImplementedError
+    atividades = []
+
+    sql = """select atv.* from webuser.tb_atividades atv
+            inner join webuser.tb_agendamento agd
+            on atv.id = agd.atividade
+            where agd.cliente = %s"""
+    
+    value = [id]
+
+    results = run_sql(sql, value)
+    for row in results:
+
+        tipo_plano = plano.get_one(row["tipo_plano"])
+        nome_instrutor = instrutor.get_one(row['instrutor'])
+
+        atividade = Atividade(
+            row['nome'],
+            nome_instrutor.nome, 
+            row['data_atividade'],
+            row['duracao'],
+            row['capacidade'],
+            tipo_plano.plano,
+            row['ativo'],
+            row['id']
+        )
+
+        atividades.append(atividade)
+
+    return atividades
+
+
+
+
+def get_all_active(is_active = True) -> list:
+    
+    clientes = []
+
+    sql = f"SELECT * FROM WEBUSER.TB_ATIVIDADE WHERE ATIVO = {is_active} ORDER BY NOME ASC"
+    
+    results = run_sql(sql)
+
+    for row in results:
+        tipo_plano = plano.get_one(row["tipo_plano"])
+
+        cliente = Cliente(
+            row["nome"],
+            row["sobrenome"],
+            row["data_nascimento"],
+            row["endereco"],
+            row["telefone"],
+            row["email"],
+            tipo_plano.plano,
+            row["data_inicio"],
+            row["ativo"],
+            row["id"]
+        )
+
+        clientes.append(cliente)
+    
+    return clientes
 
 def get_all_inactive():
-    raise NotImplementedError
+    return get_all_active(False)

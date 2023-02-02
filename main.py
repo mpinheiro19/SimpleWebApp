@@ -1,8 +1,8 @@
-from conectores.conector_instrutor import *
+from conectores.conector_cliente import *
 
 if __name__=="__main__":
 
-    r = get_activities(1)
+    r = get_activitites(2)
     print(*r)
 
     # r=get_all()
