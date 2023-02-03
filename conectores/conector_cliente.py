@@ -44,7 +44,7 @@ def get_one(id : int):
 
     if results is not None:
 
-        tipo_plano = plano.get_one(results["plano"])
+        tipo_plano = plano.get_one(results["tipo_plano"])
 
         cliente = Cliente(
             results["nome"],
@@ -53,7 +53,7 @@ def get_one(id : int):
             results["endereco"],
             results["telefone"],
             results["email"],
-            results["tipo_plano"],
+            tipo_plano.plano,
             results["data_inicio"],
             results["ativo"],
             results["id"]
