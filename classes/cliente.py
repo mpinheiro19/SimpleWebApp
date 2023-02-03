@@ -24,3 +24,6 @@ class Cliente:
         self.data_inicio = data_inicio
         self.ativo = ativo
         self.id = id
+
+    def __str__(self) -> str:
+        return f"""\nNome: {self.nome}\nSobrenome: {self.sobrenome}\ndata_nascimento: {self.data_nascimento}\nendereco: {self.endereco}\ntelefone: {self.telefone}\ne-mail: {self.email}\nPlano: {self.tipo_plano}\nInicio Relacionamento: {self.data_inicio}\nAtivo: {self.ativo}\nid: {self.id}"""

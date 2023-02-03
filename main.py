@@ -1,6 +1,13 @@
-from conectores.conector_plano import get_all
+from conectores.conector_agendamento import *
 
 if __name__=="__main__":
-    r = get_all()
-    for i,_ in enumerate(r):
-        print(r[i].__str__())
+
+    r = Agendamento(
+        atividade = 3,
+        cliente = 6
+        )
+
+    check_one(3,5)
+
+    # r=get_all()
+    # print(*r)

@@ -16,3 +16,6 @@ class Instrutor:
         self.endereco = endereco
         self.telefone = telefone
         self.id = id
+
+    def __str__(self) -> str:
+        return f"""\nNome: {self.nome}\nSobrenome: {self.sobrenome}\ndata_nascimento: {self.data_nascimento}\nendereco: {self.endereco}\ntelefone: {self.telefone}\nid: {self.id}"""
