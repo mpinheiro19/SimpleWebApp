@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="flexcards">
+  <div class="add-card">
+    <span></span>
+    <a href="/membros/novo"></a>
+  </div>
+  {% for cliente in membros %}
+  <div class="card">
+    <img id="logo" src="{{url_for('static', filename='images/logo.jpg')}}" alt="logo">
+    <h4 id="name"><b>{{cliente.nome}} {{cliente.sobrenome}}</b></h4>
+    <h5>Id do cliente: {{cliente.id}}</h5>
+    <h5>{{cliente.tipo_plano.plano}}</h5>
+    <hr>
+    <p>
+      <a class="card-btn" href="/membros/{{cliente.id}}">Detalhes</a>
+    </p>
+    <hr>
+    <p>
+      <a class="card-btn" href="/agendamentos/novo/cliente/{{cliente.id}}">Fazer Agendamentos</a>
+    </p>
+    <hr>
+    <p>
+      <a class="card-btn" href="/membros/{{cliente.id}}/edit">Editar</a>
+    </p>
+    <hr>
+    <p>
+      <a class="card-btn" href="/membros/{{cliente.id}}/delete">Remover</a>
+    </p>
+    <hr>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
