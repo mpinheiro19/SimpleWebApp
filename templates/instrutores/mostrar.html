@@ -16,7 +16,7 @@
             <ul>
             {% for atividade in instrutor_atividades %}
                 <li>
-                    <a href="/atividades/{{ atividade.id }}"> {{atividade.nome}} - {{atividade.data.strftime("%d/%m/%Y")}} - {{atividade.data.strftime("%I:%M %p")}}</a>
+                    <a href="/atividades/{{ atividade.id }}"> {{atividade.nome}} - {{atividade.data_atividade.strftime("%d/%m/%Y")}} - {{atividade.data_atividade.strftime("%I:%M %p")}}</a>
                 </li>
             {% endfor %}
             </ul>
