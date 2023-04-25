@@ -104,7 +104,7 @@ def new(instrutor : Instrutor):
         instrutor.telefone
         ]
 
-    sql_query = "INSERT INTO webuser.tb_instrutores(nome, sobrenome,data_nascimento,endereco,telefone) VALUES (%s, %s, %s, %s, %s) RETURNING *;"
+    sql_query = "INSERT INTO webuser.tb_instrutores (nome,sobrenome,data_nascimento,endereco,telefone) VALUES (%s, %s, %s, %s, %s) RETURNING *;"
 
     results = run_sql(sql_query, value)
 
